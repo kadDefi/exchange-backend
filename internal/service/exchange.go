@@ -53,13 +53,12 @@ func (c *ContractExchange) processLogTransfer(ctx context.Context, tl types.Log)
 	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] transfer %s -> %s", tl.BlockNumber, c.Address.String(), e.TokenId.String(), e.From.String(), e.To.String())
 
 	nftItem := domain.NFTItem{
-		CreatedAt:             time.Now(),
-		UpdatedAt:             time.Now(),
-		CollectionAddress:     c.Address.String(),
-		OwnerAddress:          e.To.String(),
-		TokenIndex:            e.TokenId.Int64(),
-		TokenID:               e.TokenId.String(),
-		LastSyncedBlockNumber: tl.BlockNumber,
+		CreatedAt:         time.Now(),
+		UpdatedAt:         time.Now(),
+		CollectionAddress: c.Address.String(),
+		OwnerAddress:      e.To.String(),
+		TokenIndex:        e.TokenId.Int64(),
+		TokenID:           e.TokenId.String(),
 	}
 
 	if err := c.service.repo.CreateNFTItem(ctx, &nftItem); err != nil {
