@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS `nft_item` (
 	`owner_address` CHAR(66) NOT NULL,
 	`token_index` BIGINT(20) NOT NULL,
 	`token_id` VARCHAR(66) NOT NULL,
-	`token_uri` TIMESTAMP NULL,
+    `meta_data` TEXT NULL,
+	`token_url` TEXT NULL,
 	PRIMARY KEY (id),
 	INDEX idx_nft_item (collection_address,token_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `order` (
     `seller_address` CHAR(66) NOT NULL,
     `buyer_address` CHAR(66) NOT NULL,
     `token_id` VARCHAR(66) NOT NULL,
-    `token_uri` TIMESTAMP NULL,
+    `token_url` TEXT NULL,
     `price` VARCHAR(255) NOT NULL,
     `tx_hash` VARCHAR(66) NOT NULL,
     PRIMARY KEY (id),
@@ -62,14 +63,14 @@ CREATE TABLE IF NOT EXISTS `market` (
     `collection_address` CHAR(66) NOT NULL,
     `seller_address` CHAR(66) NOT NULL,
     `token_id` VARCHAR(66) NOT NULL,
-    `token_uri` TIMESTAMP NULL,
+    `token_url` TEXT NULL,
     `price` VARCHAR(255) NOT NULL,
     `price_float` DECIMAL(20, 18) NOT NULL,
-    `status` tinyint NOT NULL,
+    `status` TINYINT(1) NOT NULL,
     PRIMARY KEY (id),
     INDEX idx_nft_item (collection_address,token_id),
     INDEX idx_nft_item_seller (collection_address,token_id,seller_address),
-    INDEX idx_nft_item_status (collection_address,token_id,seller_address,status),
+    INDEX idx_nft_item_status (collection_address,token_id,seller_address,status)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `ethereum_block_header` (

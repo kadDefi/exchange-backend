@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"exchange-backend/internal/domain"
 	"exchange-backend/internal/pkg/abi"
 	"exchange-backend/internal/pkg/helper"
@@ -9,7 +10,9 @@ import (
 	"exchange-backend/internal/repo"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/pkg/errors"
+	"io/ioutil"
 	"math/big"
+	"net/http"
 	"time"
 )
 
@@ -85,7 +88,39 @@ func (c *ContractExchange) processLogMetadataUpdate(ctx context.Context, tl type
 				log.FromContext(ctx).Sugar().Infof("Get Token URI Error: %v", err)
 				return err
 			} else {
-				ms.TokenURI = tokenUrl
+				metadata := tokenUrl
+				req, err := http.NewRequest("GET", metadata, nil)
+				if err != nil {
+					return err
+				}
+
+				req.Header.Add("Accept", "application/json")
+				req.Header.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36")
+
+				res, err := http.DefaultClient.Do(req)
+
+				defer func() {
+					if res != nil {
+						_ = res.Body.Close()
+					}
+				}()
+				if res == nil || err != nil {
+					return err
+				}
+				body, err := ioutil.ReadAll(res.Body)
+				if err != nil {
+					return err
+				}
+
+				data := domain.Metadate{}
+				err = json.Unmarshal(body, &data)
+				if err != nil {
+					log.FromContext(ctx).Sugar().Errorf("Unmarshal Error: %v", err)
+					return err
+				}
+
+				ms.MetaData = tokenUrl
+				ms.TokenURl = data.Image
 				if err := c.service.repo.UpdateNFTItem(ctx, ms); err != nil {
 					log.FromContext(ctx).Sugar().Infof("Update NFT Item Error: %v", err)
 					return err

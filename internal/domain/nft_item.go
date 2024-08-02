@@ -12,7 +12,8 @@ type NFTItem struct {
 
 	TokenIndex int64  `json:"token_index" gorm:"column:token_index"`
 	TokenID    string `json:"token_id" gorm:"column:token_id"`
-	TokenURI   string `json:"token_uri" gorm:"column:token_uri"`
+	MetaData   string `json:"meta_data" gorm:"column:meta_data"`
+	TokenURl   string `json:"token_url" gorm:"column:token_url"`
 }
 
 func (NFTItem) TableName() string {
@@ -29,4 +30,17 @@ type QueryNFTItemArg struct {
 type NFTItemResp struct {
 	Items []*NFTItem `json:"items"`
 	Total int        `json:"total"`
+}
+
+type Metadate struct {
+	Image       string `json:"image"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	NftPrice    string `json:"nftPrice"`
+	NftPhone    string `json:"nftPhone"`
+	QQNum       string `json:"qqNum"`
+	WeChatNum   string `json:"weChatNum"`
+	TelegramNum string `json:"telegramNum"`
+	SkypeNum    string `json:"skypeNum"`
+	BbmNum      string `json:"bbmNum"`
 }
