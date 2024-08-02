@@ -83,7 +83,7 @@ func (c *ContractExchange) processLogMetadataUpdate(ctx context.Context, tl type
 		log.FromContext(ctx).Sugar().Infof("NFT item %s@%s not found", c.Address.String(), e.TokenId.String())
 		return err
 	} else {
-		if ms.TokenURI == "" {
+		if ms.TokenURl == "" {
 			if tokenUrl, err := c.GetTokenURI(ctx, ms.TokenIndex); err != nil {
 				log.FromContext(ctx).Sugar().Infof("Get Token URI Error: %v", err)
 				return err
@@ -150,7 +150,7 @@ func (c *ContractExchange) processLogSellOrder(ctx context.Context, tl types.Log
 		TokenID:           e.TokenId.String(),
 		Price:             e.Price.String(),
 		SellerAddress:     e.From.String(),
-		TokenURI:          nftItem.TokenURI,
+		TokenURI:          nftItem.TokenURl,
 		PriceFloat:        helper.TokenAmountStrToFloat64(e.Price.String()),
 		Status:            repo.ONMARKET,
 	}
