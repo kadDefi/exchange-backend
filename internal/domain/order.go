@@ -12,7 +12,7 @@ type Order struct {
 	BuyerAddress      string `json:"buyer_address" gorm:"column:buyer_address"`
 
 	TokenID  string `json:"token_id" gorm:"column:token_id"`
-	TokenURI string `json:"token_uri" gorm:"column:token_uri"`
+	TokenURI string `json:"token_uri" gorm:"column:token_url"`
 	Price    string `json:"price" gorm:"column:price"`
 	TxHash   string `json:"tx_hash" gorm:"tx_hash"`
 }

@@ -11,7 +11,7 @@ type Market struct {
 	SellerAddress     string `json:"seller_address" gorm:"column:seller_address"`
 
 	TokenID    string  `json:"token_id" gorm:"column:token_id"`
-	TokenURI   string  `json:"token_uri" gorm:"column:token_uri"`
+	TokenURI   string  `json:"token_url" gorm:"column:token_url"`
 	Price      string  `json:"price" gorm:"column:price"`
 	PriceFloat float64 `json:"price_float" gorm:"column:price_float"`
 	Status     uint8   `json:"status" gorm:"column:status"`
