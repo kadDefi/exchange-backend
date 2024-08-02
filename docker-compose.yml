@@ -1,8 +1,8 @@
 services:
   api:
-    image: kadseaorg/exchange-backend:latest
+    image: kadseaorg/exchange-backend:develop
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
       - exchange-backend
@@ -10,10 +10,12 @@ services:
       - api
       - --config
       - /etc/config/local.yml
+    ports:
+      - "9080:9080"
   sync_log:
-    image: kadseaorg/exchange-backend:latest
+    image: kadseaorg/exchange-backend:develop
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
       - exchange-backend
@@ -22,9 +24,9 @@ services:
       - --config
       - /etc/config/local.yml
   process_log:
-    image: kadseaorg/exchange-backend:latest
+    image: kadseaorg/exchange-backend:develop
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
       - exchange-backend
@@ -33,9 +35,9 @@ services:
       - --config
       - /etc/config/local.yml
   process_task:
-    image: kadseaorg/exchange-backend:latest
+    image: kadseaorg/exchange-backend:develop
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
       - exchange-backend
@@ -44,9 +46,9 @@ services:
       - --config
       - /etc/config/local.yml
   cron_job:
-    image: kadseaorg/exchange-backend:latest
+    image: kadseaorg/exchange-backend:develop
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
       - exchange-backend

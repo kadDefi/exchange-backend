@@ -61,7 +61,7 @@ func (r *Repo) QueryContract(ctx context.Context, arg *domain.QueryContractArg) 
 	if arg.Pagination.PerPage != nil {
 		tx = tx.Limit(*arg.Pagination.PerPage)
 		if arg.Pagination.Page != nil {
-			tx = tx.Offset(*arg.Pagination.Page * *arg.Pagination.PerPage)
+			tx = tx.Offset((*arg.Pagination.Page - 1) * *arg.Pagination.PerPage)
 		}
 	}
 
