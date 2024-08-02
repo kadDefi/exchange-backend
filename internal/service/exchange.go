@@ -64,7 +64,7 @@ func (c *ContractExchange) processLogTransfer(ctx context.Context, tl types.Log)
 		TokenID:           e.TokenId.String(),
 	}
 
-	if err := c.service.repo.CreateNFTItem(ctx, &nftItem); err != nil {
+	if err := c.service.UpsertNFTItem(ctx, &nftItem); err != nil {
 		return errors.Wrapf(err, "failed to create NFT item")
 	}
 
@@ -138,7 +138,7 @@ func (c *ContractExchange) processLogSellOrder(ctx context.Context, tl types.Log
 		return err
 	}
 
-	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] TokenTransferredToExchange %s -> %s", tl.BlockNumber, c.Address.String(), e.TokenId.String(), e.From.String(), e.Price.String())
+	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] SellOrder %s -> %s", tl.BlockNumber, c.Address.String(), e.TokenId.String(), e.From.String(), e.Price.String())
 
 	nftItem, err := c.service.repo.GetNFTItemByAddress(ctx, c.Address.String(), e.TokenId.String())
 	if err != nil {
