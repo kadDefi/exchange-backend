@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  api:
+    image: kadseaorg/exchange-backend:latest
+    volumes:
+      - ./config.yml:/etc/config/local.yml
+    restart: always
+    command:
+      - bend
+      - run-unit
+      - api
+      - --config
+      - /etc/config/local.yml
+  sync_log:
+    image: kadseaorg/exchange-backend:latest
+    volumes:
+      - ./config.yml:/etc/config/local.yml
+    restart: always
+    command:
+      - bend
+      - run-unit
+      - sync-log
+      - --config
+      - /etc/config/local.yml
+  process_log:
+    image: kadseaorg/exchange-backend:latest
+    volumes:
+      - ./config.yml:/etc/config/local.yml
+    restart: always
+    command:
+      - bend
+      - run-unit
+      - process-log
+      - --config
+      - /etc/config/local.yml
+  process_task:
+    image: kadseaorg/exchange-backend:latest
+    volumes:
+      - ./config.yml:/etc/config/local.yml
+    restart: always
+    command:
+      - bend
+      - run-unit
+      - process-task
+      - --config
+      - /etc/config/local.yml
+  cron_job:
+    image: kadseaorg/exchange-backend:latest
+    volumes:
+      - ./config.yml:/etc/config/local.yml
+    restart: always
+    command:
+      - bend
+      - run-unit
+      - cron-job
+      - --config
+      - /etc/config/local.yml

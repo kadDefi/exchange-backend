@@ -1,0 +1,14 @@
+.DS_Store
+
+.vscode/
+.idea/
+
+data/
+bin/
+
+configs/
+
+.env
+
+cmd/script/custom_*.go
+local.yml
