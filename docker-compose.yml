@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   api:
     image: kadseaorg/exchange-backend:latest
@@ -7,7 +5,7 @@ services:
       - ./config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - api
       - --config
@@ -18,7 +16,7 @@ services:
       - ./config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - sync-log
       - --config
@@ -29,7 +27,7 @@ services:
       - ./config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - process-log
       - --config
@@ -40,7 +38,7 @@ services:
       - ./config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - process-task
       - --config
@@ -51,7 +49,7 @@ services:
       - ./config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - cron-job
       - --config

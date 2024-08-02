@@ -51,7 +51,7 @@ func connectDB(
 				corelog.New(os.Stdout, "\r\n", corelog.LstdFlags),
 				logger.Config{
 					SlowThreshold:             1000 * time.Millisecond,
-					LogLevel:                  logger.Warn,
+					LogLevel:                  logger.Info,
 					IgnoreRecordNotFoundError: true,
 					Colorful:                  true,
 				},
