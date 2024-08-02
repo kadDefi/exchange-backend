@@ -22,8 +22,8 @@ func (Order) TableName() string {
 }
 
 type QueryOrderArg struct {
-	SellerAddress *string    `form:"seller_address"`
-	BuyerAddress  *string    `form:"buyer_address"`
+	SellerAddress *string    `form:"sellerAddress"`
+	BuyerAddress  *string    `form:"buyerAddress"`
 	Pagination    Pagination `form:"pagination"`
 }
 
