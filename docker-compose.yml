@@ -1,13 +1,11 @@
-version: '3.9'
-
 services:
   api:
     image: kadseaorg/exchange-backend:latest
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - api
       - --config
@@ -15,10 +13,10 @@ services:
   sync_log:
     image: kadseaorg/exchange-backend:latest
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - sync-log
       - --config
@@ -26,10 +24,10 @@ services:
   process_log:
     image: kadseaorg/exchange-backend:latest
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - process-log
       - --config
@@ -37,10 +35,10 @@ services:
   process_task:
     image: kadseaorg/exchange-backend:latest
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - process-task
       - --config
@@ -48,10 +46,10 @@ services:
   cron_job:
     image: kadseaorg/exchange-backend:latest
     volumes:
-      - ./config.yml:/etc/config/local.yml
+      - ./.config.yml:/etc/config/local.yml
     restart: always
     command:
-      - bend
+      - exchange-backend
       - run-unit
       - cron-job
       - --config
