@@ -20,3 +20,14 @@ type Order struct {
 func (Order) TableName() string {
 	return "order"
 }
+
+type QueryOrderArg struct {
+	SellerAddress *string    `form:"seller_address"`
+	BuyerAddress  *string    `form:"buyer_address"`
+	Pagination    Pagination `form:"pagination"`
+}
+
+type OrderResp struct {
+	Items []*Order `json:"items"`
+	Total int      `json:"total"`
+}
