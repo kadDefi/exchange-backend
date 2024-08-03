@@ -121,6 +121,9 @@ func (c *ContractExchange) processLogMetadataUpdate(ctx context.Context, tl type
 
 				ms.MetaData = tokenUrl
 				ms.TokenURl = data.Image
+				ms.Name = data.Name
+				ms.Description = data.Description
+				ms.NftPrice = data.NftPrice
 				if err := c.service.repo.UpdateNFTItem(ctx, ms); err != nil {
 					log.FromContext(ctx).Sugar().Infof("Update NFT Item Error: %v", err)
 					return err
