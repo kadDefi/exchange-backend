@@ -10,10 +10,13 @@ type NFTItem struct {
 	CollectionAddress string `json:"collection_address" gorm:"column:collection_address"`
 	OwnerAddress      string `json:"owner_address" gorm:"column:owner_address"`
 
-	TokenIndex int64  `json:"token_index" gorm:"column:token_index"`
-	TokenID    string `json:"token_id" gorm:"column:token_id"`
-	MetaData   string `json:"meta_data" gorm:"column:meta_data"`
-	TokenURl   string `json:"token_url" gorm:"column:token_url"`
+	TokenIndex  int64  `json:"token_index" gorm:"column:token_index"`
+	TokenID     string `json:"token_id" gorm:"column:token_id"`
+	MetaData    string `json:"meta_data" gorm:"column:meta_data"`
+	TokenURl    string `json:"token_url" gorm:"column:token_url"`
+	Name        string `json:"name" gorm:"column:name"`
+	Description string `json:"description" gorm:"column:description"`
+	NftPrice    string `json:"nftPrice" gorm:"column:nft_price"`
 }
 
 func (NFTItem) TableName() string {

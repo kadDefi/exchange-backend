@@ -37,6 +37,9 @@ CREATE TABLE IF NOT EXISTS `nft_item` (
 	`token_id` VARCHAR(66) NOT NULL,
     `meta_data` TEXT NULL,
 	`token_url` TEXT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `description` TEXT NULL,
+    `nft_price` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (id),
 	INDEX idx_nft_item (collection_address,token_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
