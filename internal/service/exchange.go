@@ -71,7 +71,6 @@ func (c *ContractExchange) processLogTransfer(ctx context.Context, tl types.Log)
 	if err := c.service.jobClient.Enqueue(ctx, domain.TaskRefreshTokenURL{
 		CollectionAddress: c.Address.String(),
 		TokenID:           e.TokenId.String(),
-		EthereumLog:       helper.New(domain.ConvertTypesLogToEthereumLog(tl)),
 	}); err != nil {
 		return err
 	}

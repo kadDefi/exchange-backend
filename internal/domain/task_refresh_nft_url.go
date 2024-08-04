@@ -5,9 +5,8 @@ import (
 )
 
 type TaskRefreshTokenURL struct {
-	CollectionAddress string       `json:"collection_address"`
-	TokenID           string       `json:"token_id"`
-	EthereumLog       *EthereumLog `json:"ethereum_log"`
+	CollectionAddress string `json:"collection_address"`
+	TokenID           string `json:"token_id"`
 }
 
 func (t TaskRefreshTokenURL) Name() string { return "refresh_token_url" }
