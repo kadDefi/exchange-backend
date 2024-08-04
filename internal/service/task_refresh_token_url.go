@@ -13,7 +13,9 @@ func (s *Service) ProcessTaskRefreshTokenURL(ctx context.Context, arg string) er
 		return err
 	}
 
-	log.FromContext(ctx).Sugar().Infof("Processing task refresh token,CollectionAddress: %v, TokenId: %v", t.CollectionAddress, t.TokenID)
+	log.FromContext(ctx).Sugar().Infof("Processing task refresh token,CollectionAddress: %s", t.CollectionAddress)
+	log.FromContext(ctx).Sugar().Infof("Processing task refresh token,CollectionAddress: %s", t.TokenID)
+	log.FromContext(ctx).Sugar().Info("==========`Processing task refresh=========")
 
 	return nil
 }
