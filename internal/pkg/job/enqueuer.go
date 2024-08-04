@@ -78,6 +78,8 @@ func (c *Client) enqueue(
 			}
 
 		} else {
+			log.FromContext(ctx).Sugar().Infof("Enqueueing job with unique key: %s", options.uniqueKey)
+			log.FromContext(ctx).Sugar().Infof("Enqueueing job with unique arg: %s", string(argBs))
 			var j *work.Job
 			j, err = c.enqueuer.EnqueueUnique(
 				options.name,
