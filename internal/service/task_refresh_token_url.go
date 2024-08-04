@@ -13,7 +13,7 @@ func (s *Service) ProcessTaskRefreshTokenURL(ctx context.Context, arg string) er
 		return err
 	}
 
-	log.FromContext(ctx).Sugar().Infof("Processing task refresh token,CollectionAddress: %v, TokenId: %v,Block Number:%d,Index:%d", t.CollectionAddress, t.TokenID, t.EthereumLog.BlockNumber, t.EthereumLog.LogIndex)
+	log.FromContext(ctx).Sugar().Infof("Processing task refresh token,CollectionAddress: %v, TokenId: %v", t.CollectionAddress, t.TokenID)
 
 	return nil
 }
