@@ -66,3 +66,20 @@ func (m EthereumLog) TypesLog() types.Log {
 		Removed:     m.Removed,
 	}
 }
+
+func ConvertTypesLogToEthereumLog(v types.Log) EthereumLog {
+	return EthereumLog{
+		Address: v.Address.String(),
+		Topics: (func() string {
+			bs, _ := json.Marshal(v.Topics)
+			return string(bs)
+		})(),
+		Data:        hexutil.Bytes(v.Data).String(),
+		BlockNumber: v.BlockNumber,
+		TxHash:      v.TxHash.String(),
+		TxIndex:     v.TxIndex,
+		BlockHash:   v.BlockHash.String(),
+		LogIndex:    v.Index,
+		Removed:     v.Removed,
+	}
+}
