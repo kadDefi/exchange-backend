@@ -68,13 +68,6 @@ func (c *ContractExchange) processLogTransfer(ctx context.Context, tl types.Log)
 		return errors.Wrapf(err, "failed to create NFT item")
 	}
 
-	if err := c.service.jobClient.Enqueue(ctx, domain.TaskRefreshTokenURL{
-		CollectionAddress: c.Address.String(),
-		TokenID:           e.TokenId.String(),
-	}); err != nil {
-		return err
-	}
-
 	return nil
 }
 
