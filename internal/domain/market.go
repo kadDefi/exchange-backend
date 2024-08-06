@@ -10,11 +10,13 @@ type Market struct {
 	CollectionAddress string `json:"collection_address" gorm:"column:collection_address"`
 	SellerAddress     string `json:"seller_address" gorm:"column:seller_address"`
 
-	TokenID    string  `json:"token_id" gorm:"column:token_id"`
-	TokenURI   string  `json:"token_url" gorm:"column:token_url"`
-	Price      string  `json:"price" gorm:"column:price"`
-	PriceFloat float64 `json:"price_float" gorm:"column:price_float"`
-	Status     uint8   `json:"status" gorm:"column:status"`
+	TokenID     string  `json:"token_id" gorm:"column:token_id"`
+	TokenURI    string  `json:"token_url" gorm:"column:token_url"`
+	Price       string  `json:"price" gorm:"column:price"`
+	PriceFloat  float64 `json:"price_float" gorm:"column:price_float"`
+	Name        string  `json:"name" gorm:"column:name"`
+	Description string  `json:"description" gorm:"column:description"`
+	Status      uint8   `json:"status" gorm:"column:status"`
 }
 
 func (Market) TableName() string {

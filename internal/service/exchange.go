@@ -156,6 +156,8 @@ func (c *ContractExchange) processLogSellOrder(ctx context.Context, tl types.Log
 		TokenURI:          nftItem.TokenURl,
 		PriceFloat:        helper.TokenAmountStrToFloat64(e.Price.String()),
 		Status:            repo.ONMARKET,
+		Name:              nftItem.Name,
+		Description:       nftItem.Description,
 	}
 
 	if err := c.service.repo.CreateMarket(ctx, &market); err != nil {
