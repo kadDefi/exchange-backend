@@ -42,7 +42,7 @@ func NewContractExchange(
 	c.RegisterEventHandler(exchangeEventSellOrder.ID, c.processLogSellOrder)
 	c.RegisterEventHandler(exchangeEventMetadataUpdate.ID, c.processLogMetadataUpdate)
 	c.RegisterEventHandler(exchangeEventCancelOrder.ID, c.processLogCancelOrder)
-	c.RegisterEventHandler(exchangeEventCancelOrder.ID, c.processLogCancelOrder)
+	c.RegisterEventHandler(exchangeEventPurchasedOrder.ID, c.processLogPurchasedOrder)
 
 	return c, nil
 }
