@@ -1,7 +1,7 @@
 package repo
 
 const (
-	CANCLE uint8 = 0 + iota
-	ONMARKET
+	ONMARKET uint8 = 1 + iota
 	SELLED
+	CANCLE
 )

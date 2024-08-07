@@ -173,7 +173,7 @@ func (c *ContractExchange) processLogCancelOrder(ctx context.Context, tl types.L
 		return err
 	}
 
-	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] CancelOrder %s", tl.BlockNumber, c.Address.String(), e.TokenId.String())
+	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] CancelOrder", tl.BlockNumber, c.Address.String(), e.TokenId.String())
 
 	if market, err := c.service.repo.GetMarketByAddress(ctx, c.Address.String(), e.TokenId.String(), repo.ONMARKET); err != nil {
 		return errors.Wrapf(err, "failed to create market")
@@ -184,7 +184,7 @@ func (c *ContractExchange) processLogCancelOrder(ctx context.Context, tl types.L
 		}
 	}
 
-	return err
+	return nil
 }
 
 func (c *ContractExchange) processLogPurchasedOrder(ctx context.Context, tl types.Log) error {
@@ -220,7 +220,7 @@ func (c *ContractExchange) processLogPurchasedOrder(ctx context.Context, tl type
 		}
 	}
 
-	return err
+	return nil
 }
 
 func (c *ContractExchange) GetTokenURI(ctx context.Context, tokenId int64) (string, error) {
