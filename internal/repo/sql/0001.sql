@@ -54,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `order` (
     `token_id` VARCHAR(66) NOT NULL,
     `token_url` TEXT NULL,
     `price` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `description` TEXT NULL,
     `tx_hash` VARCHAR(66) NOT NULL,
     PRIMARY KEY (id),
     INDEX idx_nft_item (collection_address,token_id)
@@ -69,6 +71,8 @@ CREATE TABLE IF NOT EXISTS `market` (
     `token_url` TEXT NULL,
     `price` VARCHAR(255) NOT NULL,
     `price_float` DECIMAL(20, 18) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `description` TEXT NULL,
     `status` TINYINT(1) NOT NULL,
     PRIMARY KEY (id),
     INDEX idx_nft_item (collection_address,token_id),

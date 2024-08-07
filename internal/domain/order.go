@@ -11,10 +11,12 @@ type Order struct {
 	SellerAddress     string `json:"seller_address" gorm:"column:seller_address"`
 	BuyerAddress      string `json:"buyer_address" gorm:"column:buyer_address"`
 
-	TokenID  string `json:"token_id" gorm:"column:token_id"`
-	TokenURI string `json:"token_uri" gorm:"column:token_url"`
-	Price    string `json:"price" gorm:"column:price"`
-	TxHash   string `json:"tx_hash" gorm:"tx_hash"`
+	TokenID     string `json:"token_id" gorm:"column:token_id"`
+	TokenURI    string `json:"token_uri" gorm:"column:token_url"`
+	Price       string `json:"price" gorm:"column:price"`
+	TxHash      string `json:"tx_hash" gorm:"tx_hash"`
+	Name        string `json:"name" gorm:"column:name"`
+	Description string `json:"description" gorm:"column:description"`
 }
 
 func (Order) TableName() string {

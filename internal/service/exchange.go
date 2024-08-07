@@ -195,6 +195,11 @@ func (c *ContractExchange) processLogPurchasedOrder(ctx context.Context, tl type
 
 	log.FromContext(ctx).Sugar().Infof("[%d] [%s:%s] PurchasedOrder %s =>%s", tl.BlockNumber, c.Address.String(), e.TokenId.String(), e.Seller.String(), e.Buyer.String())
 
+	nftItem, err := c.service.repo.GetNFTItemByAddress(ctx, c.Address.String(), e.TokenId.String())
+	if err != nil {
+		return err
+	}
+
 	if market, err := c.service.repo.GetMarketByAddress(ctx, c.Address.String(), e.TokenId.String(), repo.ONMARKET); err != nil {
 		return errors.Wrapf(err, "failed to create market")
 	} else {
@@ -212,7 +217,9 @@ func (c *ContractExchange) processLogPurchasedOrder(ctx context.Context, tl type
 			TokenID:           e.TokenId.String(),
 			TokenURI:          market.TokenURI,
 			Price:             market.Price,
-			TxHash:            e.Raw.TxHash.String(),
+			TxHash:            tl.TxHash.String(),
+			Name:              nftItem.Name,
+			Description:       nftItem.Description,
 		}
 
 		if err := c.service.repo.CreateOrder(ctx, &order); err != nil {
