@@ -55,7 +55,7 @@ func (r *Repo) QueryMarket(ctx context.Context, arg *domain.QueryMarketArg) ([]*
 	}
 
 	if arg.SellerAddress != nil {
-		tx = tx.Where("seller_address < ?", *arg.SellerAddress)
+		tx = tx.Where("seller_address = ?", *arg.SellerAddress)
 	}
 
 	if arg.PriceGt != nil {
