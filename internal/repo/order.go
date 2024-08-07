@@ -24,11 +24,11 @@ func (r *Repo) QueryOrder(ctx context.Context, arg *domain.QueryOrderArg) ([]*do
 	tx := r.db.WithContext(ctx).Model(&domain.Order{})
 
 	if arg.SellerAddress != nil {
-		tx = tx.Where("seller_address < ?", *arg.SellerAddress)
+		tx = tx.Where("seller_address = ?", *arg.SellerAddress)
 	}
 
 	if arg.BuyerAddress != nil {
-		tx = tx.Where("buyer_address < ?", *arg.BuyerAddress)
+		tx = tx.Where("buyer_address = ?", *arg.BuyerAddress)
 	}
 
 	eg := errgroup.Group{}
