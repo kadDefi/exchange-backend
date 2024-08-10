@@ -2,16 +2,14 @@ package api
 
 import (
 	"context"
-	"net"
-	"net/http"
-	"time"
-
 	"exchange-backend/internal/api/middleware"
 	"exchange-backend/internal/config"
 	"exchange-backend/internal/pkg/log"
 	"exchange-backend/internal/service"
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
+	"net"
+	"net/http"
 )
 
 var ProviderSet = wire.NewSet(
@@ -35,8 +33,6 @@ func NewBackend(
 	e.Use(middleware.Logger())
 	e.Use(middleware.Error())
 	e.Use(middleware.Recovery())
-	rateLimiter := middleware.NewIPRateLimiter(10, time.Second)
-	e.Use(rateLimiter.Middleware())
 
 	b := &Backend{
 		addr: cfg.API.Addr,

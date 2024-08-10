@@ -55,7 +55,7 @@ func Logger() gin.HandlerFunc {
 			With("method", param.Method).
 			With("path", param.Path).
 			With("status", param.StatusCode).
-			With("latency", param.Latency.Milliseconds()).
+			With("latency", param.Latency).
 			With("error", param.ErrorMessage).
 			With("body_size", param.BodySize).
 			With("client_ip", param.ClientIP).
