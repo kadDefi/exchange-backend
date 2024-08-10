@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"exchange-backend/internal/domain"
+	"exchange-backend/internal/pkg/log"
+	"time"
 )
 
 func (s *Service) QueryOrder(ctx context.Context, arg *domain.QueryOrderArg) (*domain.OrderResp, error) {
@@ -17,4 +19,18 @@ func (s *Service) QueryOrder(ctx context.Context, arg *domain.QueryOrderArg) (*d
 	resp.Items = nftItems
 	resp.Total = total
 	return resp, nil
+}
+
+func (s *Service) QueryOrderLock(ctx context.Context) error {
+	log.FromContext(ctx).Sugar().Infof("QueryOrderLock Start!")
+
+	lock, err := s.lockerClient.Obtain(ctx, "OrderLock", 5*time.Second, nil)
+	if err != nil {
+		return err
+	}
+	defer lock.Release(ctx)
+
+	log.FromContext(ctx).Sugar().Infof("========QueryOrderLock End!========")
+
+	return nil
 }

@@ -49,6 +49,7 @@ func NewBackend(
 	e.GET("/user/nft", b.queryUserNFT)
 	e.GET("/markets/list", b.queryNFTOrder)
 	e.GET("/order/list", b.queryOrderList)
+	e.GET("/order/lock", b.queryOrdeLock)
 
 	return b
 }

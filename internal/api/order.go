@@ -23,3 +23,13 @@ func (b *Backend) queryOrderList(c *gin.Context) {
 		"rows": rows,
 	})
 }
+
+func (b *Backend) queryOrdeLock(c *gin.Context) {
+	if err := b.service.QueryOrderLock(c); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"rows": "ok",
+	})
+}
