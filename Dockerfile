@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.2
 
-FROM golang:1.18.4-bullseye AS dep
+FROM golang:1.21.5-bullseye AS dep
 
 WORKDIR /app
 COPY go.mod .
@@ -17,10 +17,10 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     mkdir -p bin \
     && go build -ldflags="-X main.Version=${VERSION}" -o ./bin/exchange-backend ./cmd/
 
-FROM golang:1.18.4-bullseye
+FROM golang:1.21.5-bullseye
 
-ENV GIN_MODE release
-ENV DEPLOYMENT_ENVIRONMENT production
+ENV GIN_MODE debug
+ENV DEPLOYMENT_ENVIRONMENT testing
 
 RUN mkdir -p /usr/local/bin
 COPY --from=builder /app/bin/exchange-backend /usr/local/bin/
