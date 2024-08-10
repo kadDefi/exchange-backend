@@ -4,6 +4,7 @@ import (
 	"context"
 	"exchange-backend/internal/domain"
 	"exchange-backend/internal/pkg/log"
+	"github.com/bsm/redislock"
 	"time"
 )
 
@@ -24,7 +25,10 @@ func (s *Service) QueryOrder(ctx context.Context, arg *domain.QueryOrderArg) (*d
 func (s *Service) QueryOrderLock(ctx context.Context) error {
 	log.FromContext(ctx).Sugar().Infof("QueryOrderLock Start!")
 
-	lock, err := s.lockerClient.Obtain(ctx, "OrderLock", 5*time.Second, nil)
+	lock, err := s.lockerClient.Obtain(ctx, "OrderLock", 5*time.Second, &redislock.Options{
+		RetryStrategy: redislock.LinearBackoff(500 * time.Millisecond),
+	})
+
 	if err != nil {
 		return err
 	}
