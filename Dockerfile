@@ -19,8 +19,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
 
 FROM golang:1.21.5-bullseye
 
-ENV GIN_MODE release
-ENV DEPLOYMENT_ENVIRONMENT production
+ENV GIN_MODE development
+ENV DEPLOYMENT_ENVIRONMENT testing
 
 RUN mkdir -p /usr/local/bin
 COPY --from=builder /app/bin/exchange-backend /usr/local/bin/
