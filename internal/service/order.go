@@ -23,7 +23,7 @@ func (s *Service) QueryOrder(ctx context.Context, arg *domain.QueryOrderArg) (*d
 }
 
 func (s *Service) QueryOrderLock(ctx context.Context) error {
-	log.FromContext(ctx).Sugar().Infof("QueryOrderLock Start!")
+	log.FromContext(ctx).Sugar().Debug("QueryOrderLock Start!")
 
 	lock, err := s.lockerClient.Obtain(ctx, "OrderLock", 5*time.Second, &redislock.Options{
 		RetryStrategy: redislock.LinearBackoff(500 * time.Millisecond),
@@ -35,7 +35,7 @@ func (s *Service) QueryOrderLock(ctx context.Context) error {
 	defer lock.Release(ctx)
 
 	time.Sleep(2 * time.Second)
-	log.FromContext(ctx).Sugar().Infof("========QueryOrderLock End!========")
+	log.FromContext(ctx).Sugar().Debug("========QueryOrderLock End!========")
 
 	return nil
 }
