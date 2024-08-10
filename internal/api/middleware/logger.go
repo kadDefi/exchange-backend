@@ -45,20 +45,19 @@ func Logger() gin.HandlerFunc {
 		// Process request
 		c.Next()
 
-		// Stop timer
 		param.Latency = time.Since(start)
 		param.BodySize = c.Writer.Size()
 		param.StatusCode = c.Writer.Status()
 		param.ErrorMessage = c.Errors.ByType(gin.ErrorTypePrivate).String()
 
 		log.FromContext(c).Sugar().
-			With("latency", param.Latency).
-			With("client_ip", param.ClientIP).
 			With("method", param.Method).
+			With("path", param.Path).
 			With("status", param.StatusCode).
+			With("latency", param.Latency).
 			With("error", param.ErrorMessage).
 			With("body_size", param.BodySize).
-			With("path", param.Path).
+			With("client_ip", param.ClientIP).
 			Infof("access-out")
 	}
 }
