@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"time"
 
 	"exchange-backend/internal/pkg/log"
@@ -45,20 +46,24 @@ func Logger() gin.HandlerFunc {
 		// Process request
 		c.Next()
 
+		param.TimeStamp = start
 		param.Latency = time.Since(start)
 		param.BodySize = c.Writer.Size()
 		param.StatusCode = c.Writer.Status()
 		param.ErrorMessage = c.Errors.ByType(gin.ErrorTypePrivate).String()
-		param.TimeStamp.Format("2006/01/02 - 15:04:05")
 
-		log.FromContext(c).Sugar().
-			With("method", param.Method).
-			With("path", param.Path).
-			With("status", param.StatusCode).
-			With("latency", param.Latency).
-			With("error", param.ErrorMessage).
-			With("body_size", param.BodySize).
-			With("client_ip", param.ClientIP).
-			Infof("access-out")
+		logMessage := fmt.Sprintf(
+			"%s - - [%s] \"%s %s %dms HTTP/1.1\" %d %d \"\" \"%s\"",
+			param.ClientIP,
+			param.TimeStamp.Format("02/Jan/2006:15:04:05 -0700"), // Custom timestamp format
+			param.Method,
+			param.Path,
+			param.Latency.Milliseconds(),
+			param.StatusCode,
+			param.BodySize,
+			param.ErrorMessage,
+		)
+
+		logger.Sugar().Infof("access-out - %s", logMessage)
 	}
 }
