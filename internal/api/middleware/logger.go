@@ -49,6 +49,7 @@ func Logger() gin.HandlerFunc {
 		param.BodySize = c.Writer.Size()
 		param.StatusCode = c.Writer.Status()
 		param.ErrorMessage = c.Errors.ByType(gin.ErrorTypePrivate).String()
+		param.TimeStamp.Format("2006/01/02 - 15:04:05")
 
 		log.FromContext(c).Sugar().
 			With("method", param.Method).
