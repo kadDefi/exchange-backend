@@ -30,6 +30,7 @@ func (s *Service) QueryOrderLock(ctx context.Context) error {
 	}
 	defer lock.Release(ctx)
 
+	time.Sleep(5 * time.Second)
 	log.FromContext(ctx).Sugar().Infof("========QueryOrderLock End!========")
 
 	return nil
