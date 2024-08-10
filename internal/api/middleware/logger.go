@@ -42,18 +42,11 @@ func Logger() gin.HandlerFunc {
 		}
 
 		param.Path = path
-
-		log.FromContext(c).Sugar().
-			With("client_ip", param.ClientIP).
-			With("method", param.Method).
-			With("path", param.Path).
-			Infof("access-in")
-
 		// Process request
 		c.Next()
 
 		// Stop timer
-		param.Latency = time.Now().Sub(start)
+		param.Latency = time.Since(start)
 		param.BodySize = c.Writer.Size()
 		param.StatusCode = c.Writer.Status()
 		param.ErrorMessage = c.Errors.ByType(gin.ErrorTypePrivate).String()
